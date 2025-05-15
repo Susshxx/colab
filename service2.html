@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join & Save - Loyalty Program</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background: #f0f4f8;
+    }
+    .card {
+      background: #ffffff;
+      padding: 30px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border-radius: 15px;
+      width: 350px;
+      text-align: center;
+      animation: fadeIn 1s ease-in-out;
+    }
+    .discount-badge {
+      background: linear-gradient(135deg, #ff416c, #ff4b2b);
+      color: #fff;
+      font-weight: bold;
+      padding: 15px;
+      border-radius: 50%;
+      width: 90px;
+      height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 20px auto;
+      font-size: 22px;
+      transform: scale(1);
+      animation: pulse 2s infinite;
+    }
+    .payment-details {
+      margin-top: 20px;
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: opacity 0.6s ease, max-height 0.6s ease;
+    }
+    .payment-details.show {
+      opacity: 1;
+      max-height: 600px;
+    }
+    button {
+      background-color: #0a5275;
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+      margin-top: 20px;
+    }
+    button:hover {
+      background-color: #063d59;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <h2>Exclusive Loyalty Program</h2>
+  <p>Sign up now and enjoy discounts on your next trip!</p>
+  <p>Apply code: <strong>FLY10</strong> for <strong>15% OFF</strong> instantly!</p>
+  <div class="discount-badge">15% OFF</div>
+  <p><strong>🔥 Limited: Only 10 codes left! 🔥</strong></p>
+  <button onclick="togglePaymentDetails()">Join Now</button>
+
+  <div id="payment" class="payment-details">
+    <h3>Payment Summary</h3>
+    <p>Original Price: <del>$100.00</del></p>
+    <p>Discount (15%): <span style="color: green;">-$15.00</span></p>
+    <h4>Final Price: <span style="color: #0a5275;">$85.00</span></h4>
+    <button onclick="proceedToPayment()">Proceed to Payment</button>
+  </div>
+</div>
+
+<script>
+  function togglePaymentDetails() {
+    const paymentDiv = document.getElementById('payment');
+    paymentDiv.classList.toggle('show');
+  }
+
+  function proceedToPayment(){
+    // Store promo code and ticket details in localStorage
+    const ticketdetail = {
+        flight: 200,
+        baggage: 25,
+        insurance: 15,
+        guide: 30
+    };
+
+    const promoCode = 'FLY10'; // Hardcoded promo code for simplicity
+
+    localStorage.setItem('ticketDetails', JSON.stringify(ticketdetail));
+    localStorage.setItem('promoCode', promoCode); // Store promo code
+
+    window.location.href = 'payment2.html';
+  }
+</script>
+
+</body>
+</html>
